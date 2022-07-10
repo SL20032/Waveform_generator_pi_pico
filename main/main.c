@@ -1,13 +1,20 @@
 #include "pico/stdlib.h"
+#include "SPI.h"
+
+#define ONBOARD_LED 25
+
+uint8_t data[8] = {0xaa,0xbb,0xcc,0xdd,0xee,0xff,0xab,0xbc};
+
 int main() 
 {
-	const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-	gpio_init(LED_PIN);
-	gpio_set_dir(LED_PIN, GPIO_OUT);
+	SPI_main_init();
+
+	gpio_init(ONBOARD_LED);
+	gpio_set_dir(ONBOARD_LED,true);
+	gpio_put(ONBOARD_LED,1);
+
 	while (true) {
-		gpio_put(LED_PIN, 1);
-		sleep_ms(250);
-		gpio_put(LED_PIN, 0);
+		SPI_write_to_AD9833(data,8);
 		sleep_ms(250);
 	}
 }

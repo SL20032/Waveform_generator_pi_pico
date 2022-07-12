@@ -1,9 +1,8 @@
 #include "pico/stdlib.h"
 #include "AD9833.h"
+#include "PWM.h"
 
 #define ONBOARD_LED 25
-
-
 
 int main() 
 {
@@ -12,6 +11,10 @@ int main()
 	gpio_init(ONBOARD_LED);
 	gpio_set_dir(ONBOARD_LED,true);
 	gpio_put(ONBOARD_LED,1);
+
+	PWM0_Init();
+	PWM0_set_freq_and_duty(44100,50);
+	PWM0_enable();
 
 	sleep_ms(250);
 

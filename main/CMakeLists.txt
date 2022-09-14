@@ -5,6 +5,7 @@ add_executable(main
          AD9833.c
          Timer.c
          PWM.c
+         PCM4251.c
          )
 
  # Import pico_stdlib which imports commonly used features

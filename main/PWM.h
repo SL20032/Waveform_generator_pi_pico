@@ -2,7 +2,7 @@
 #include "hardware/pwm.h"
 #include <math.h>
 
-#define PWM_PIN 15
+#define PWM_PIN 22
 
 #define PWM_CLK 125000000
 #define PWM_MAX_FREQ 100000

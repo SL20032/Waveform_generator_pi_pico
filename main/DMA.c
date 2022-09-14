@@ -1,6 +1,6 @@
 #include "DMA.h"
 
-int DMA_SPI_MAIN_Init(spi_inst_t* spi_inst, uint spi_DERQ)
+int DMA_SPI_TX_Init(spi_inst_t* spi_inst, uint spi_DERQ)
 {
     int spi_main_mosi_chan = dma_claim_unused_channel(true);
 

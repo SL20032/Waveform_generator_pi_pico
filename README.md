@@ -16,6 +16,8 @@ Projest aims to build simple waveform generator (with digitaly adjustable amplit
 hardware part of this projest consst of two main elements:
 ### Analog
 Responsible for generating (AD9833) and ampifaing and offsetting (pair of LM7171) analog signal. As well as aditional components needed for example for square wave processing. (attached baord layout require redesign for proper operation of offset capability - work in progress)
+
+![](Pictures/Ex_PCB_Analog_Shematic.png)
 ### Digital
 Responsible for controling analog part of circutry using digital potenciometers (MCP4231 / MC4251) integrated on analog board prototype as well as comunication with PC using galvanicly isoleded interfece.
 ## PC Software

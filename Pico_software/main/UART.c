@@ -23,7 +23,7 @@ void uart_rx_handler()
         {
             usart_rx_indeks = 0;
             uart_set_irq_enables(UART_ID, false, false);
-            DMA_UART_RX_Start_Transfer(UART_RX_DMA_chan,UART_INPUT_ARR,5);
+            DMA_UART_RX_Start_Transfer(UART_RX_DMA_chan,UART_INPUT_ARR,7);
         }
         
     }

@@ -20,3 +20,4 @@
 void UART_Init(char* input_data_bufer);
 bool UART_Write(uint8_t* data, uint8_t data_len);
 bool UART_is_new_data_avalible(void);
+uint8_t calculate_crc(char* data, unsigned int length);

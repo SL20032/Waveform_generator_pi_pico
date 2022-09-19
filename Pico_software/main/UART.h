@@ -17,7 +17,9 @@
 #define UART_RX_DERQ    DREQ_UART0_RX
 #define UART_IRQ        UART0_IRQ
 
-void UART_Init(char* input_data_bufer);
+#define UART_SB_CRC     0x3e    // CRC of three bytes (encoded "AT+")
+
+void UART_Init(uint8_t* input_data_bufer);
 bool UART_Write(uint8_t* data, uint8_t data_len);
 bool UART_is_new_data_avalible(void);
-uint8_t calculate_crc(char* data, unsigned int length);
+bool check_crc(uint8_t* data, unsigned int data_length);

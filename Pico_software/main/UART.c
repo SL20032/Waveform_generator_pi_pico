@@ -7,9 +7,9 @@ int MEM_to_MEM_DMA_chan = 0;
 int usart_rx_indeks = 0;
 volatile bool uart_frame_ready_flag = false;
 
-static char UART_FRAME_START_BYTES[3] = "AT+";
-char UART_INPUT_ARR[10];
-char* UART_RX_PROCESSING_ARR;
+static uint8_t UART_FRAME_START_BYTES[3] = "AT+";
+uint8_t UART_INPUT_ARR[10];
+uint8_t* UART_RX_PROCESSING_ARR;
 
 void uart_rx_handler() 
 {
@@ -35,7 +35,7 @@ void uart_dma_handler()
     if (Is_DMA_chan_IRQ_responsible(UART_RX_DMA_chan))
     {
         DMA_IQR_settings_changer(MEM_to_MEM_DMA_chan, UART_RX_DMA_chan);
-        DMA_MEM_to_MEM_Start_Transfer(MEM_to_MEM_DMA_chan,UART_INPUT_ARR,UART_RX_PROCESSING_ARR,5);
+        DMA_MEM_to_MEM_Start_Transfer(MEM_to_MEM_DMA_chan,UART_INPUT_ARR,UART_RX_PROCESSING_ARR,7);
     }
     else
     {
@@ -48,18 +48,19 @@ void uart_dma_handler()
     dma_hw->ints0 = 1u << UART_RX_DMA_chan;
 }
 
-
-uint8_t calculate_crc(char* data, unsigned int length)
+//data_length = noumber of bytes in frame - number of start byts - number ofbits of CRC
+bool check_crc(uint8_t* data, unsigned int data_length)
 {
-	uint8_t crc = 0;
-	crc = 0x3e;  // CRC of three bytes (encoded "AT+")
-	for (int i = 0; i < length; i++) {
+	uint8_t crc = UART_SB_CRC;
+	crc = 0x3e;  
+	for (int i = 0; i < data_length; i++) {
 		crc = (crc ^ data[i]);
 	}
-	return crc;
+    if (crc == data[data_length]) return true;
+    else return false;
 }
 
-void UART_Init(char* input_data_bufer)
+void UART_Init(uint8_t* input_data_bufer)
 {
     gpio_set_function(UART_TX_PIN,GPIO_FUNC_UART);
     gpio_set_function(UART_RX_PIN,GPIO_FUNC_UART);

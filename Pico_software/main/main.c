@@ -27,7 +27,8 @@ int main()
 	PCM4251_set_potenciometer_position(5,80);
 
 	sleep_ms(1000);
-	UART_Write(test_arr,10);
+	//UART_Write(test_arr,10);
+	UART_Write("Generator software v01",22);
 
 	while (true) {
 		if(UART_is_new_data_avalible())
